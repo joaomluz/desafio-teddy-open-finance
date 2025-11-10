@@ -1,0 +1,70 @@
+name: Backend CI/CD
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'apps/back-end/**'
+      - '.github/workflows/backend.yml'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'apps/back-end/**'
+      - '.github/workflows/backend.yml'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: clients_db_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install back-end dependencies
+        working-directory: apps/back-end
+        run: npm ci
+
+      - name: Lint
+        working-directory: apps/back-end
+        run: npm run lint
+
+      - name: Run tests
+        working-directory: apps/back-end
+        env:
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres
+          DB_DATABASE: clients_db_test
+          JWT_SECRET: test-secret
+          NODE_ENV: test
+        run: npm run test
+
+      - name: Build
+        working-directory: apps/back-end
+        run: npm run build
+

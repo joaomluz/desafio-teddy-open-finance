@@ -1,0 +1,333 @@
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-secondary);
+}
+
+/* Header/Topbar */
+.layout-header {
+  background: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 70px;
+}
+
+.layout-header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  gap: 24px;
+  position: relative;
+  width: 100%;
+}
+
+/* Menu Hambúrguer */
+.menu-icon {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  width: 32px;
+  height: 32px;
+  justify-content: center;
+}
+
+.menu-icon span {
+  width: 20px;
+  height: 2px;
+  background: #333;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.menu-icon:hover span {
+  background: var(--teddy-orange);
+}
+
+/* Logo - estilos movidos para Logo.css, mantendo apenas ajustes específicos do layout */
+
+/* Navegação */
+.layout-nav {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-shrink: 0;
+}
+
+.nav-link {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 0;
+  position: relative;
+  transition: color 0.3s ease;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.nav-link:hover {
+  color: var(--teddy-orange);
+}
+
+.nav-link.active {
+  color: var(--teddy-orange);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--teddy-orange);
+  animation: slideIn 0.3s ease;
+}
+
+.nav-link.logout-link {
+  /* Mantém na navegação central */
+}
+
+@keyframes slideIn {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Saudação do usuário */
+.user-greeting {
+  color: #333;
+  font-size: 14px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.user-greeting strong {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Sidebar/Drawer */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 2000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar.open {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.sidebar-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.sidebar-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 280px;
+  max-width: 85vw;
+  height: 100%;
+  background: #FFFFFF;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.open .sidebar-content {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  padding: 24px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-close {
+  background: transparent;
+  border: none;
+  font-size: 32px;
+  color: #333;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.sidebar-close:hover {
+  color: var(--teddy-orange);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0;
+  flex: 1;
+}
+
+.sidebar-link {
+  padding: 12px 24px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+  background: transparent;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+}
+
+.sidebar-link:hover {
+  background: var(--teddy-orange-light);
+  color: var(--teddy-orange);
+  border-left-color: var(--teddy-orange);
+}
+
+.sidebar-link.active {
+  background: var(--teddy-orange-light);
+  color: var(--teddy-orange);
+  border-left-color: var(--teddy-orange);
+}
+
+/* Main Content */
+.layout-main {
+  flex: 1;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  background-color: var(--bg-secondary);
+  min-height: calc(100vh - 70px);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .layout-nav {
+    gap: 24px;
+  }
+  
+  .user-greeting {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 968px) {
+  .layout-nav {
+    position: static;
+    transform: none;
+    display: none;
+  }
+
+  .layout-header-content {
+    justify-content: flex-start;
+  }
+}
+
+/* O header sempre mantém max-width: 1400px para alinhar com o conteúdo principal */
+/* Em telas menores, o padding responsivo garante o alinhamento */
+
+@media (max-width: 968px) {
+  .layout-header-content {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .layout-header-content {
+    gap: 16px;
+    max-width: 100%;
+  }
+
+  .menu-icon {
+    display: flex;
+  }
+
+  .user-greeting {
+    display: none;
+  }
+
+  /* Logo ajustado no componente */
+
+  .layout-main {
+    padding: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .layout-header-content {
+    padding: 0 16px;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .layout-header {
+    height: 64px;
+  }
+
+  .layout-header-content {
+    padding: 0 16px;
+  }
+
+  /* Logo ajustado no componente */
+}
+

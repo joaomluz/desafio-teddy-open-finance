@@ -1,0 +1,38 @@
+.logo-container {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 100%;
+}
+
+.logo-image {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  max-width: 200px;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.logo.logo-fallback {
+  display: flex;
+}
+
+.logo-primary {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--teddy-orange);
+  letter-spacing: -0.02em;
+}
+
+.logo-secondary {
+  font-size: 12px;
+  font-weight: 400;
+  color: #9CA3AF;
+  letter-spacing: 0.01em;
+}
+

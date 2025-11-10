@@ -1,0 +1,47 @@
+name: Frontend CI/CD
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'apps/front-end/**'
+      - '.github/workflows/frontend.yml'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'apps/front-end/**'
+      - '.github/workflows/frontend.yml'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install front-end dependencies
+        working-directory: apps/front-end
+        run: npm ci
+
+      - name: Lint
+        working-directory: apps/front-end
+        run: npm run lint
+
+      - name: Run tests
+        working-directory: apps/front-end
+        run: npm run test
+
+      - name: Build
+        working-directory: apps/front-end
+        run: npm run build
+
