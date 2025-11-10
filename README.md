@@ -1,3 +1,6 @@
+> 🔗 Ambiente online (EC2): http://18.217.221.182:5173/login  
+> Esta aplicação está rodando em uma instância AWS EC2. O frontend está exposto na porta 5173 e o backend na porta 3000 conforme a configuração de Docker Compose.
+
 # Sistema de Clientes - MVP Full-Stack
 
 Sistema completo de gerenciamento de clientes com autenticação, CRUD, dashboard administrativo e observabilidade.
