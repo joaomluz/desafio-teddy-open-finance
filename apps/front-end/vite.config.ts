@@ -12,7 +12,7 @@ export default defineConfig({
   server: {
     port: 5173,
     host: true,
-    allowedHosts: ['alertapx.com', 'http://18.217.221.182/'],
+    allowedHosts: ['alertapx.com', 'http://18.217.221.182/', 'api.alertapx.com'],
   },
   test: {
     globals: true,
