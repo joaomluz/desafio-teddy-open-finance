@@ -16,7 +16,22 @@ function Layout() {
   };
 
   const isActive = (path: string) => {
-    return location.pathname.startsWith(path) ? 'active' : '';
+    const currentPath = location.pathname;
+    
+    // Verificar rotas específicas primeiro (mais específicas primeiro)
+    if (path === '/clients/selected') {
+      return currentPath === '/clients/selected' ? 'active' : '';
+    }
+    
+    // Para /clients, verificar se é exatamente /clients ou começa com /clients/ mas não é /clients/selected
+    if (path === '/clients') {
+      return currentPath === '/clients' || 
+             (currentPath.startsWith('/clients/') && currentPath !== '/clients/selected') 
+             ? 'active' : '';
+    }
+    
+    // Para outras rotas, usar startsWith
+    return currentPath.startsWith(path) ? 'active' : '';
   };
 
   const toggleSidebar = () => {
