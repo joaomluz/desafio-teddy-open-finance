@@ -17,6 +17,12 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
 
+    // Não processar exceções para rotas de healthcheck e metrics
+    // Elas devem retornar suas próprias respostas
+    if (request.url === '/healthz' || request.url === '/metrics') {
+      return;
+    }
+
     const status =
       exception instanceof HttpException
         ? exception.getStatus()

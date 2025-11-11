@@ -15,6 +15,12 @@ export class LoggingInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const request = context.switchToHttp().getRequest();
     const { method, url } = request;
+    
+    // Ignorar logging para rotas de healthcheck e metrics
+    if (url === '/healthz' || url === '/metrics') {
+      return next.handle();
+    }
+    
     const now = Date.now();
 
     return next.handle().pipe(
