@@ -3,7 +3,7 @@ import {
   Get,
   Post,
   Body,
-  Patch,
+  Put,
   Param,
   Delete,
   UseGuards,
@@ -70,7 +70,7 @@ export class ClientsController {
     };
   }
 
-  @Patch(':id')
+  @Put(':id')
   @ApiOperation({ summary: 'Atualizar cliente' })
   async update(@Param('id') id: string, @Body() updateClientDto: UpdateClientDto) {
     const client = await this.clientsService.update(id, updateClientDto);
