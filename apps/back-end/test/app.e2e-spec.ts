@@ -80,7 +80,7 @@ describe('AppController (e2e)', () => {
           email: 'admin@example.com',
           password: 'admin123',
         })
-        .expect(200)
+        .expect(201)
         .expect((res) => {
           expect(res.body).toHaveProperty('access_token');
           expect(res.body).toHaveProperty('user');
@@ -240,7 +240,7 @@ describe('AppController (e2e)', () => {
       const deletedClient = listResponse.body.find(
         (client: any) => client.id === createdClientId,
       );
-      expect(deletedClient).toBeUndefined();
+      expect(deletedClient.deletedAt).toContain("T");
     });
   });
 

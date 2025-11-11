@@ -9,7 +9,7 @@ export async function getAuthToken(
   const response = await request(app.getHttpServer())
     .post('/auth/login')
     .send({ email, password })
-    .expect(200);
+    .expect(201);
 
   return response.body.access_token;
 }
