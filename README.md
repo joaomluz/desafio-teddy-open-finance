@@ -68,6 +68,10 @@ O layout do front-end foi desenvolvido seguindo o design fornecido no Figma:
 
 ## 🏗️ Arquitetura
 
+## 🗺️ Diagrama de Arquitetura
+
+![Diagrama de Arquitetura](./architecture-diagram.svg)
+
 ### Visão Local
 
 ```
