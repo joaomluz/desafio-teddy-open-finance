@@ -30,10 +30,30 @@
   font-weight: 500;
   font-size: 14px;
   transition: all 0.2s;
+  font-family: inherit;
 }
 
 .btn-secondary:hover {
   background: var(--text-tertiary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary {
+  background: #F36B21;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.btn-primary:hover {
+  background: #E05D18;
   transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
 }
